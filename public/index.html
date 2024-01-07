@@ -6,7 +6,7 @@ body{
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 * {box-sizing: border-box}
-input[type=text], input[type=password] {
+input[type=text], input[type=password],input[type=email] {
    width: 100%;
    font-size: 28px;
    padding: 15px;
@@ -18,7 +18,7 @@ input[type=text], input[type=password] {
 label{
    font-size: 15px;
 }
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus,input[type=email]:focus {
    background-color: #ddd;
    outline: none;
 }
@@ -53,13 +53,17 @@ button:hover {
 <div class="formContainer">
 <h1>Sign Up Form</h1>
 <hr>
+<label for="name"><b>Name</b></label>
+<input type="text" placeholder="Enter your name" name="name" required>
+<br><br>
 <label for="email"><b>Email</b></label>
 <input type="email" placeholder="Enter Email" name="email" required>
 <br><br>
 <label for="password"><b>Password</b></label>
 <input type="password" placeholder="Enter Password" name="password" required>
-<!-- <label for="repeatPassword"><b>Repeat Password</b></label>
-<input type="password" placeholder="Repeat Password" name="repeatPassword" -->
+<br><br>
+<label for="confirmPassword"><b>confirmPassword</b></label>
+<input type="password" placeholder="confirm Password" name="confirmPassword"
 required>
 <label>
 <input type="checkbox" checked="checked" name="remember" style="margin-bottom: 15px"> Remember me
@@ -78,10 +82,11 @@ style="color:dodgerblue">Terms & Privacy</a><p>
     btn.addEventListener('click',async(e)=>{
         e.preventDefault();
 
+        let name=document.querySelector('input[type="text"]').value;
         let email=document.querySelector('input[type="email"]').value;
-        let pswd=document.querySelector('input[type="password"]').value;
-
-        let resp=await axios.post('/auth/signup',{email,pswd});
+        let password=document.querySelector('input[name="password"]').value;
+        let confirmPassword=document.querySelector('input[name="password"]').value;
+        let resp=await axios.post('/auth/signup',{name,email,password,confirmPassword});
         console.log(resp);
     })
 </script>
